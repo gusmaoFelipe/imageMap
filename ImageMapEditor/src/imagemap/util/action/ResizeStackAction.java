@@ -7,12 +7,15 @@ import imagemap.graphics.AbstractShape;
 
 /**
  * @author Niklas Miroll
- *
+ * @author Jean Henrique Ferreira
+ * @author Felipe Gusmão
  */
-public class ResizeStackAction extends AbstractStackAction {
+public class ResizeStackAction implements AbstractStackAction {
 	private AbstractShape editedShape;
 	private AbstractShape originalShape;
-	
+	protected int actionType;
+	protected String undoDescription;
+	protected String redoDescription;
 	/**
 	 * constructor
 	 * 
@@ -46,9 +49,39 @@ public class ResizeStackAction extends AbstractStackAction {
 	 * @see imagemap.util.action.AbstractStackAction#specificString()
 	 */
 	@Override
-	protected String specificString() {
+	public String specificString() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * @return the actionType
+	 */
+	public int getActionType() {
+		return actionType;
+	}
+	
+	/**
+	 * @return the undoDescription
+	 */
+	public String getUndoDescription() {
+		return undoDescription;
+	}
+
+	/**
+	 * @return the redoDescription
+	 */
+	public String getRedoDescription() {
+		return redoDescription;
+	}
+	
+	/**
+	 * overridden toString() method for debug purposes
+	 */
+	@Override
+	public String toString() {
+		String out = "[Type of Action: " + actionType + "; "
+				+ specificString() + "]";
+		return out;
+	}
 }

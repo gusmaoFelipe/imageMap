@@ -1,22 +1,18 @@
-/**
- * 
- */
 package imagemap.util.action;
 
 /**
  * @author Niklas Miroll
- *
+ * @author Jean Henrique Ferreira
+ * @author Felipe Gusmão
  */
-public abstract class AbstractStackAction {
+public interface AbstractStackAction {
 	public static final int ADD = 0;
 	public static final int REMOVE = 1;
 	public static final int MOVE = 2;
 	public static final int RESIZE = 3;
 	public static final int WIPE = 4;
 	public static final int SCALE = 5;
-	protected int actionType;
-	protected String undoDescription;
-	protected String redoDescription;
+
 	
 	// abstract section
 	
@@ -24,38 +20,28 @@ public abstract class AbstractStackAction {
 	 * 
 	 * @return string specific for type of action
 	 */
-	protected abstract String specificString();
+	public String specificString();
 	
 	// end of abstract methods
 	
 	/**
 	 * @return the actionType
 	 */
-	public int getActionType() {
-		return actionType;
-	}
+	public int getActionType();
 	
 	/**
 	 * @return the undoDescription
 	 */
-	public String getUndoDescription() {
-		return undoDescription;
-	}
+	public String getUndoDescription();
 
 	/**
 	 * @return the redoDescription
 	 */
-	public String getRedoDescription() {
-		return redoDescription;
-	}
+	public String getRedoDescription();
 	
 	/**
 	 * overridden toString() method for debug purposes
 	 */
 	@Override
-	public String toString() {
-		String out = "[Type of Action: " + actionType + "; "
-				+ specificString() + "]";
-		return out;
-	}
+	public String toString();
 }

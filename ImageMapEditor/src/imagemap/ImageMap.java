@@ -1,6 +1,3 @@
-/**
- * 
- */
 package imagemap;
 
 import imagemap.graphics.*;
@@ -21,7 +18,8 @@ import javax.swing.plaf.metal.MetalTabbedPaneUI;
 
 /**
  * @author Niklas Miroll
- *
+ * @author Jean Henrique Ferreira
+ * @author Felipe Gusmão
  */
 public class ImageMap extends JFrame implements ActionListener {
 	/**
@@ -191,22 +189,22 @@ public class ImageMap extends JFrame implements ActionListener {
 		copyClip_button = new JButton("Copy to Clipboard");
 		ImageIcon rectIcon = createImageIcon("images/rectangle.png");
 		ImageIcon circleIcon = createImageIcon("images/circle.png");
-		ImageIcon polyIcon = createImageIcon("images/polygon.png");
+		//ImageIcon polyIcon = createImageIcon("images/polygon.png");
 		ImageIcon mouseIcon = createImageIcon("images/cursor.png");
 		ImageIcon undoIcon = createImageIcon("images/undo.png");
 		ImageIcon redoIcon = createImageIcon("images/redo.png");
 		JToggleButton rectangle_button = new JToggleButton(rectIcon);
 		JToggleButton circle_button = new JToggleButton(circleIcon);
-		JToggleButton polygon_button = new JToggleButton(polyIcon);
+		//JToggleButton polygon_button = new JToggleButton(polyIcon);
 		JToggleButton mouse_button = new JToggleButton(mouseIcon);
 		group.add(rectangle_button);
 		group.add(circle_button);
-		group.add(polygon_button);
+		//group.add(polygon_button);
 		group.add(mouse_button);
 		rectangle_button.setToolTipText("Press and hold to drag the wanted rectangle.");
 		circle_button.setToolTipText("Press and hold to drag the wanted circle.");
-		polygon_button.setToolTipText("Click the corners of your wanted polygon. The last point will always connect "
-				+ "with the first. Double click or Escape will end editing of the polygon.");
+		/*polygon_button.setToolTipText("Click the corners of your wanted polygon. The last point will always connect "
+				+ "with the first. Double click or Escape will end editing of the polygon.");*/
 		mouse_button.setToolTipText("Click shape once to select, twice to edit information. Drag to move.");
 		group.setSelected(rectangle_button.getModel(), true);
 		current_toggle = AbstractShape.TYPE_RECT;
@@ -229,10 +227,10 @@ public class ImageMap extends JFrame implements ActionListener {
 		circle_button.setName("circ_button");
 		circle_button.setActionCommand("" + AbstractShape.TYPE_CIRC);
 		circle_button.addActionListener(this);
-		toolbar.add(polygon_button);
+		/*toolbar.add(polygon_button);
 		polygon_button.setName("poly_button");
 		polygon_button.setActionCommand("" + AbstractShape.TYPE_POLY);
-		polygon_button.addActionListener(this);
+		polygon_button.addActionListener(this);*/
 		toolbar.addSeparator();
 		toolbar.add(mouse_button);
 		mouse_button.addActionListener(this);
@@ -654,11 +652,6 @@ public class ImageMap extends JFrame implements ActionListener {
 		return mouse_position;
 	}
 
-	/**
-	 * 
-	 * @author Niklas Miroll
-	 *
-	 */
 	private class MouseController extends MouseAdapter {
 		/**
 		 * mouseReleased Event Handler
@@ -695,7 +688,7 @@ public class ImageMap extends JFrame implements ActionListener {
 		 */
 		private void handleLeftClick(MouseEvent e) {
 			if (dragging) {
-				handleDrag();
+				handleDrag(0);
 			} else if (moving) {
 				handleMoveAndResize(AbstractStackAction.MOVE);
 			} else if (resizing) {
@@ -708,14 +701,14 @@ public class ImageMap extends JFrame implements ActionListener {
 		/**
 		 * handle end of creating circle or rectangle Shape
 		 */
-		private void handleDrag() {
+		private void handleDrag(int type) {
 			endShape = currentProject.getImagePanel().getDraggedShape();
 			currentProject.getImagePanel().setDraggedShape(null);
 			dragging = false;
 			moving = false;
 			resizing = false;
 			temp = null;
-			currentProject.getImagePanel().addShape(endShape);
+			currentProject.getImagePanel().addShape(endShape,type);
 			startShape = null;
 			endShape = null;
 		}
@@ -779,7 +772,7 @@ public class ImageMap extends JFrame implements ActionListener {
 		private void doPoly(MouseEvent e) {
 			ImagePanel panel = currentProject.getImagePanel();
 			if (!panel.isEditing()) {
-				panel.addShape(new PolygonShape(e.getPoint()));
+				panel.addShape(new PolygonShape(e.getPoint()), AbstractShape.TYPE_POLY);
 				panel.setEditing(true);
 			} else {
 				int clicks = e.getClickCount();

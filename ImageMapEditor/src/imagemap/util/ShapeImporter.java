@@ -1,6 +1,3 @@
-/**
- * 
- */
 package imagemap.util;
 
 import imagemap.ImageMap;
@@ -20,7 +17,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * @author Niklas Miroll
- *
+ * @author Jean Henrique Ferreira
+ * @author Felipe Gusmão
  */
 public class ShapeImporter extends JDialog {
 
@@ -105,7 +103,7 @@ public class ShapeImporter extends JDialog {
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				doSelection();
+				doSelection(panel.currentShape.getType());
 			}
 		});
 		all.addActionListener(new ActionListener() {
@@ -150,7 +148,7 @@ public class ShapeImporter extends JDialog {
 			private static final long serialVersionUID = 1L;
 
 			public void actionPerformed(ActionEvent e) {
-				doSelection();
+				doSelection(panel.currentShape.getType());
 			}
 		};
 		ok.getActionMap().put("performSave", performSave);
@@ -178,11 +176,11 @@ public class ShapeImporter extends JDialog {
 	/**
 	 * write selection to shapelist
 	 */
-	public void doSelection() {
+	public void doSelection(int type) {
 		int[] tmp = jList.getSelectedIndices();
 		if (tmp.length > 0) {
 			for (int i = 0; i < tmp.length; i++) {
-				panel.addShape(itemObjects.get(tmp[i]).convertToShape());
+				panel.addShape(itemObjects.get(tmp[i]).convertToShape(),type);
 			}
 		}
 		dispose();

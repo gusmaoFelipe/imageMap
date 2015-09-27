@@ -1,19 +1,19 @@
-/**
- * 
- */
 package imagemap.util.action;
 
-import imagemap.graphics.AbstractShape;
+import imagemap.graphics.*;
 
 import java.util.Vector;
 
 /**
  * @author Niklas Miroll
- *
+ * @author Jean Henrique Ferreira
+ * @author Felipe Gusmão
  */
-public class WipeStackAction extends AbstractStackAction {
+public class WipeStackAction implements AbstractStackAction {
 	private Vector<AbstractShape> wipedShapeList = new Vector<AbstractShape>();
-
+	protected int actionType;
+	protected String undoDescription;
+	protected String redoDescription;
 	/**
 	 * constructor
 	 * 
@@ -39,9 +39,37 @@ public class WipeStackAction extends AbstractStackAction {
 	 * @see imagemap.util.action.AbstractStackAction#specificString()
 	 */
 	@Override
-	protected String specificString() {
-		// TODO Auto-generated method stub
+	public String specificString() {
 		return null;
 	}
+	/**
+	 * @return the actionType
+	 */
+	public int getActionType() {
+		return actionType;
+	}
+	
+	/**
+	 * @return the undoDescription
+	 */
+	public String getUndoDescription() {
+		return undoDescription;
+	}
 
+	/**
+	 * @return the redoDescription
+	 */
+	public String getRedoDescription() {
+		return redoDescription;
+	}
+	
+	/**
+	 * overridden toString() method for debug purposes
+	 */
+	@Override
+	public String toString() {
+		String out = "[Type of Action: " + actionType + "; "
+				+ specificString() + "]";
+		return out;
+	}
 }
