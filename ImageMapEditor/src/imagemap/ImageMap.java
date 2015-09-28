@@ -189,22 +189,17 @@ public class ImageMap extends JFrame implements ActionListener {
 		copyClip_button = new JButton("Copy to Clipboard");
 		ImageIcon rectIcon = createImageIcon("images/rectangle.png");
 		ImageIcon circleIcon = createImageIcon("images/circle.png");
-		//ImageIcon polyIcon = createImageIcon("images/polygon.png");
 		ImageIcon mouseIcon = createImageIcon("images/cursor.png");
 		ImageIcon undoIcon = createImageIcon("images/undo.png");
 		ImageIcon redoIcon = createImageIcon("images/redo.png");
 		JToggleButton rectangle_button = new JToggleButton(rectIcon);
 		JToggleButton circle_button = new JToggleButton(circleIcon);
-		//JToggleButton polygon_button = new JToggleButton(polyIcon);
 		JToggleButton mouse_button = new JToggleButton(mouseIcon);
 		group.add(rectangle_button);
 		group.add(circle_button);
-		//group.add(polygon_button);
 		group.add(mouse_button);
 		rectangle_button.setToolTipText("Press and hold to drag the wanted rectangle.");
 		circle_button.setToolTipText("Press and hold to drag the wanted circle.");
-		/*polygon_button.setToolTipText("Click the corners of your wanted polygon. The last point will always connect "
-				+ "with the first. Double click or Escape will end editing of the polygon.");*/
 		mouse_button.setToolTipText("Click shape once to select, twice to edit information. Drag to move.");
 		group.setSelected(rectangle_button.getModel(), true);
 		current_toggle = AbstractShape.TYPE_RECT;
@@ -227,10 +222,6 @@ public class ImageMap extends JFrame implements ActionListener {
 		circle_button.setName("circ_button");
 		circle_button.setActionCommand("" + AbstractShape.TYPE_CIRC);
 		circle_button.addActionListener(this);
-		/*toolbar.add(polygon_button);
-		polygon_button.setName("poly_button");
-		polygon_button.setActionCommand("" + AbstractShape.TYPE_POLY);
-		polygon_button.addActionListener(this);*/
 		toolbar.addSeparator();
 		toolbar.add(mouse_button);
 		mouse_button.addActionListener(this);
