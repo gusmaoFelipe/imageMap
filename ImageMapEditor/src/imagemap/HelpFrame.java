@@ -1,6 +1,3 @@
-/**
- * 
- */
 package imagemap;
 
 import java.awt.*;
@@ -11,7 +8,8 @@ import javax.swing.border.*;
 
 /**
  * @author Niklas Miroll
- *
+ * @author Jean Henrique Ferreira
+ * @author Felipe Gusmão
  */
 public class HelpFrame extends JFrame {
 	/**
@@ -21,11 +19,15 @@ public class HelpFrame extends JFrame {
 	private static Border margin = new EmptyBorder(5, 5, 5, 5);
 	private JTabbedPane tabs;
 	private JLabel aboutMe;
+	
+	//SINGLETON: Objeto único e global
+	private static HelpFrame objectSingleton = null;
 
 	/**
 	 * private constructor to implement Singleton
 	 */
 	private HelpFrame() {
+		//SINGLETON: Construtor privado
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -139,22 +141,14 @@ public class HelpFrame extends JFrame {
 		}
 		aboutMe.setText("\u00A9 Copyright " + period + " by Niklas Miroll");
 	}
-
-	/**
-	 * 
-	 * @return HelpFrame Instance
-	 */
-	public static HelpFrame getInstance() {
-		return InstanceHolder.INSTANCE;
-	}
-
-	/**
-	 * 
-	 * @author Niklas Miroll
-	 *
-	 */
-	private static final class InstanceHolder {
-		static final HelpFrame INSTANCE = new HelpFrame();
+	
+	//ADICIONADO NOVO GETINSTANCE DE ACORDO COM PADRAO SINGLETON
+	//Obs.: static pois está sendo usado pela classe ImageMap
+	public static HelpFrame getInstance(){
+		if(objectSingleton == null){
+			objectSingleton = new HelpFrame();
+		}
+		return objectSingleton;
 	}
 
 }
