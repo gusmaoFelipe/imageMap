@@ -627,20 +627,16 @@ public class ImageMap extends JFrame implements ActionListener {
 		return mmc;
 	}
 
-	/**
-	 * 
-	 * @return copyclip button
-	 */
-	public JButton getClip_button() {
+	public JButton getClipButton() {
 		return copyClipButton;
 	}
-
-	/**
-	 * 
-	 * @return mouse_position
-	 */
-	public JLabel getMouse_position() {
-		return mousePosition;
+	
+	public JLabel getMousePosition(){
+		return (JLabel) (this.mousePosition);
+	}
+	
+	public JLabel getMouse_Position(){
+		return (JLabel) (this.mousePosition);
 	}
 
 	private class MouseController extends MouseAdapter {
