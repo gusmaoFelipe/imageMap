@@ -126,7 +126,7 @@ public class ImageMapProject extends JTabbedPane implements ActionListener {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				if (!getTitleAt(getSelectedIndex()).equals("Image")) {
-					frame.getMousePositionI().setText("");
+					frame.getMousePositionImgMap().setText("");
 				}
 				if (getTitleAt(getSelectedIndex()).equals("Preview")) {
 					htmlPreview.setPanel(imagePanel);

@@ -13,11 +13,12 @@ import java.awt.Stroke;
 
 /**
  * @author Niklas Miroll
- *
+ * @author Jean Henrique Ferreira
+ * @author Felipe paes Gusmão
  */
 public class CircleShape extends AbstractShape {
-	private Point circ_cent;
-	private int circ_r;
+	private Point circCent;
+	private int circR;
 
 	/**
 	 * Constructor for circle shapes
@@ -27,8 +28,8 @@ public class CircleShape extends AbstractShape {
 	 */
 	public CircleShape(Point p, int r) {
 		type = TYPE_CIRC;
-		circ_cent = p;
-		circ_r = r;
+		circCent = p;
+		circR = r;
 		hashCode();
 	}
 
@@ -41,8 +42,8 @@ public class CircleShape extends AbstractShape {
 			return false;
 		}
 		CircleShape tmp2 = (CircleShape) tmp;
-		if (circ_cent.getX() == tmp2.getCenter().getX() && circ_cent.getY() == tmp2.getCenter().getY()
-				&& circ_r == tmp2.getRadius()) {
+		if (circCent.getX() == tmp2.getCenter().getX() && circCent.getY() == tmp2.getCenter().getY()
+				&& circR == tmp2.getRadius()) {
 			return true;
 		} else {
 			return false;
@@ -54,10 +55,10 @@ public class CircleShape extends AbstractShape {
 	 */
 	@Override
 	public boolean contains(int x, int y) {
-		int x_tmp = (int) circ_cent.getX();
-		int y_tmp = (int) circ_cent.getY();
+		int x_tmp = (int) circCent.getX();
+		int y_tmp = (int) circCent.getY();
 		double dist = Math.sqrt((Math.pow((x - x_tmp), 2) + Math.pow((y - y_tmp), 2)));
-		if (dist < circ_r) {
+		if (dist < circR) {
 			return true;
 		} else {
 			return false;
@@ -69,7 +70,7 @@ public class CircleShape extends AbstractShape {
 	 */
 	@Override
 	public boolean cornerContains(Point p) {
-		Rectangle tmp_circ_rect = new Rectangle(circ_cent.x + circ_r - 3, circ_cent.y - 3, 6, 6);
+		Rectangle tmp_circ_rect = new Rectangle(circCent.x + circR - 3, circCent.y - 3, 6, 6);
 		if (tmp_circ_rect.contains(p)) {
 			return true;
 		} else {
@@ -86,9 +87,9 @@ public class CircleShape extends AbstractShape {
 		Stroke stroke2 = g2.getStroke();
 		BasicStroke bs = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 3.0f, dashArray, 0.0f);
 
-		int xc = (int) circ_cent.getX();
-		int yc = (int) circ_cent.getY();
-		int r = circ_r;
+		int xc = (int) circCent.getX();
+		int yc = (int) circCent.getY();
+		int r = circR;
 
 		// draw circle with lineColor and white dotted line
 		g2.setColor(lineColor);
@@ -112,7 +113,7 @@ public class CircleShape extends AbstractShape {
 	 */
 	@Override
 	public void move(int xdir, int ydir) {
-		circ_cent.setLocation((int) circ_cent.getX() + xdir, (int) circ_cent.getY() + ydir);
+		circCent.setLocation((int) circCent.getX() + xdir, (int) circCent.getY() + ydir);
 	}
 
 	/**
@@ -120,11 +121,11 @@ public class CircleShape extends AbstractShape {
 	 */
 	@Override
 	public void movePoint(Point p, int xdir, int ydir) {
-		double xcomponent = p.getX() - circ_cent.getX() + xdir;
-		double ycomponent = p.getY() - circ_cent.getY() + ydir;
-		circ_r = (int) Math.sqrt((Math.pow(xcomponent, 2) + Math.pow(ycomponent, 2)));
-		if (circ_r < 4) {
-			circ_r = 4;
+		double xcomponent = p.getX() - circCent.getX() + xdir;
+		double ycomponent = p.getY() - circCent.getY() + ydir;
+		circR = (int) Math.sqrt((Math.pow(xcomponent, 2) + Math.pow(ycomponent, 2)));
+		if (circR < 4) {
+			circR = 4;
 		}
 	}
 
@@ -133,7 +134,7 @@ public class CircleShape extends AbstractShape {
 	 */
 	@Override
 	public CircleShape clone() {
-		return new CircleShape(new Point((int) circ_cent.getX(), (int) circ_cent.getY()), circ_r);
+		return new CircleShape(new Point((int) circCent.getX(), (int) circCent.getY()), circR);
 	}
 
 	/**
@@ -141,8 +142,8 @@ public class CircleShape extends AbstractShape {
 	 */
 	@Override
 	public String toString() {
-		String s = "Circle: [center: " + "(x: " + circ_cent.getX() + "; y: " + circ_cent.getY();
-		s += "), radius: " + circ_r + "]";
+		String s = "Circle: [center: " + "(x: " + circCent.getX() + "; y: " + circCent.getY();
+		s += "), radius: " + circR + "]";
 		return s;
 	}
 
@@ -151,7 +152,7 @@ public class CircleShape extends AbstractShape {
 	 */
 	@Override
 	public String getSpecificHTML() {
-		return "circle\" coords=\"" + (int) circ_cent.getX() + "," + (int) circ_cent.getY() + "," + circ_r + "\" ";
+		return "circle\" coords=\"" + (int) circCent.getX() + "," + (int) circCent.getY() + "," + circR + "\" ";
 	}
 
 	/**
@@ -167,7 +168,7 @@ public class CircleShape extends AbstractShape {
 	 * @return radius of circle if it's a circle
 	 */
 	public int getRadius() {
-		int radius = 0 + circ_r;
+		int radius = 0 + circR;
 		return radius;
 	} // end of getRadius()
 
@@ -176,7 +177,7 @@ public class CircleShape extends AbstractShape {
 	 * @return center of circle if it's a circle
 	 */
 	public Point getCenter() {
-		return (Point) circ_cent.clone();
+		return (Point) circCent.clone();
 	} // end of getCenter()
 
 	/**
@@ -184,7 +185,7 @@ public class CircleShape extends AbstractShape {
 	 */
 	@Override
 	public String getCoords() {
-		return circ_cent.x + "," + circ_cent.y + "," + circ_r;
+		return circCent.x + "," + circCent.y + "," + circR;
 	}
 
 	/**
@@ -200,8 +201,8 @@ public class CircleShape extends AbstractShape {
 	 */
 	@Override
 	public void scale(float scale) {
-		circ_cent = new Point(Math.round(circ_cent.x * scale), Math.round(circ_cent.y * scale));
-		circ_r = Math.round(circ_r * scale);
+		circCent = new Point(Math.round(circCent.x * scale), Math.round(circCent.y * scale));
+		circR = Math.round(circR * scale);
 	}
 
 }

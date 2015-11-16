@@ -632,7 +632,7 @@ public class ImageMap extends JFrame implements ActionListener {
 	}
 	
 	
-	public JLabel getMousePositionI(){
+	public JLabel getMousePositionImgMap(){
 		return this.mousePositionImgMap;
 	}
 
