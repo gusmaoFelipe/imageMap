@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package imagemap.panels;
 
 import imagemap.*;
@@ -18,7 +16,8 @@ import javax.swing.*;
 
 /**
  * @author Niklas Miroll
- *
+ * @author Jean Henrique Ferreira
+ * @author Felipe Gusmão
  */
 public class ImagePanel extends JPanel {
 
@@ -34,7 +33,7 @@ public class ImagePanel extends JPanel {
 	private Stack<AbstractStackAction> redoStack = new Stack<AbstractStackAction>();
 	private AbstractShape tempShape;
 	private AbstractShape draggedShape;
-	private AbstractShape currentShape;
+	public AbstractShape currentShape;
 	private String imagePath;
 	private String savePath;
 	private CustomHTMLDoc doc;
@@ -87,10 +86,10 @@ public class ImagePanel extends JPanel {
 	 * @param shape
 	 *            shape to be added
 	 */
-	public void addShape(AbstractShape shape) {
+	public void addShape(AbstractShape shape, int type) {
 		shapeList.add(shape);
 		addBlankElement(shape);
-		undoStack.push(new AddStackAction(AbstractStackAction.ADD, shape.clone()));
+		undoStack.push(new AddStackAction(AbstractStackAction.ADD, shape.clone(),type));
 		frame.getUndo().setEnabled(true);
 		frame.getUndoButton().setEnabled(true);
 		currentShape = shape;
@@ -259,7 +258,7 @@ public class ImagePanel extends JPanel {
 		default:
 			break;
 		}
-		undoStack.push(new AddStackAction(AbstractStackAction.ADD, shapeList.lastElement()));
+		undoStack.push(new AddStackAction(AbstractStackAction.ADD, shapeList.lastElement(),type));
 		addBlankElement(shapeList.lastElement());
 		upRevRep();
 	}
@@ -376,7 +375,7 @@ public class ImagePanel extends JPanel {
 		default:
 			break;
 		}
-		undoStack.push(new AddStackAction(AbstractStackAction.ADD, shapeList.lastElement()));
+		undoStack.push(new AddStackAction(AbstractStackAction.ADD, shapeList.lastElement(),type));
 		addBlankElement(shapeList.lastElement());
 		upRevRep();
 	}
