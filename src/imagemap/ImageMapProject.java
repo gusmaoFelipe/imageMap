@@ -126,7 +126,7 @@ public class ImageMapProject extends JTabbedPane implements ActionListener {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				if (!getTitleAt(getSelectedIndex()).equals("Image")) {
-					frame.getMousePositionI().setText("");
+					frame.getMouse_position().setText("");
 				}
 				if (getTitleAt(getSelectedIndex()).equals("Preview")) {
 					htmlPreview.setPanel(imagePanel);
@@ -148,9 +148,9 @@ public class ImageMapProject extends JTabbedPane implements ActionListener {
 							}
 						});
 					}
-					frame.getClipButton().setVisible(true);
+					frame.getClip_button().setVisible(true);
 				} else {
-					frame.getClipButton().setVisible(false);
+					frame.getClip_button().setVisible(false);
 				}
 			}
 		});
