@@ -36,18 +36,18 @@ public class ImageMap extends JFrame implements ActionListener {
 	private HashMap<String, ImageMapProject> projectObjects = new HashMap<String, ImageMapProject>();
 	private JButton undoButton;
 	private JButton redoButton;
-	private JButton copyClip_button;
+	private JButton copyClipButton;
 	private ButtonGroup group;
 	private JMenuItem undo;
 	private JMenuItem redo;
 	private JMenuItem shapeImport;
 	private JMenuItem scale;
-	private JLabel mouse_position;
+	private JLabel mousePosition;
 	private JLabel path;
 	private Point temp;
 	private AbstractShape startShape;
 	private AbstractShape endShape;
-	private int current_toggle;
+	private int currentToggle;
 	private int startId;
 	private JFileChooser fc = new JFileChooser();
 	private boolean empty = true;
@@ -186,7 +186,7 @@ public class ImageMap extends JFrame implements ActionListener {
 		// toolbar
 		group = new ButtonGroup();
 		JToolBar toolbar = new JToolBar("Tools", JToolBar.HORIZONTAL);
-		copyClip_button = new JButton("Copy to Clipboard");
+		copyClipButton = new JButton("Copy to Clipboard");
 		ImageIcon rectIcon = createImageIcon("images/rectangle.png");
 		ImageIcon circleIcon = createImageIcon("images/circle.png");
 		ImageIcon mouseIcon = createImageIcon("images/cursor.png");
@@ -202,10 +202,10 @@ public class ImageMap extends JFrame implements ActionListener {
 		circle_button.setToolTipText("Press and hold to drag the wanted circle.");
 		mouse_button.setToolTipText("Click shape once to select, twice to edit information. Drag to move.");
 		group.setSelected(rectangle_button.getModel(), true);
-		current_toggle = AbstractShape.TYPE_RECT;
-		copyClip_button.setVisible(false);
-		copyClip_button.addActionListener(this);
-		copyClip_button.setName("clip");
+		currentToggle = AbstractShape.TYPE_RECT;
+		copyClipButton.setVisible(false);
+		copyClipButton.addActionListener(this);
+		copyClipButton.setName("clip");
 		undoButton = new JButton(undoIcon);
 		undoButton.setEnabled(false);
 		undoButton.addActionListener(this);
@@ -230,7 +230,7 @@ public class ImageMap extends JFrame implements ActionListener {
 		toolbar.addSeparator();
 		toolbar.add(undoButton);
 		toolbar.add(redoButton);
-		toolbar.add(copyClip_button);
+		toolbar.add(copyClipButton);
 
 		// tabbing for several ImageMap projects at the same time
 		projects = new JTabbedPane();
@@ -251,12 +251,12 @@ public class ImageMap extends JFrame implements ActionListener {
 		// status bar
 		JPanel status = new JPanel(new BorderLayout());
 		path = new JLabel("ImageMap wurde noch nicht gespeichert.");
-		mouse_position = new JLabel("  ");
+		mousePosition = new JLabel("  ");
 		status.add(path, BorderLayout.WEST);
-		status.add(mouse_position, BorderLayout.EAST);
-		Font font = mouse_position.getFont();
+		status.add(mousePosition, BorderLayout.EAST);
+		Font font = mousePosition.getFont();
 		Font boldFont = new Font(font.getFontName(), Font.BOLD, font.getSize());
-		mouse_position.setFont(boldFont);
+		mousePosition.setFont(boldFont);
 		path.setFont(boldFont);
 
 		// build frame and assemble components
@@ -529,23 +529,23 @@ public class ImageMap extends JFrame implements ActionListener {
 	 * @param type
 	 */
 	private void doToggle(int type) {
-		if (currentProject.getImagePanel().isEditing() && current_toggle != type) {
+		if (currentProject.getImagePanel().isEditing() && currentToggle != type) {
 			int returnVal = JOptionPane.showConfirmDialog(this, "You are currently editing a shape "
 					+ "of another type. Do you want to switch the tool and discard changes?");
 			if (returnVal == JOptionPane.YES_OPTION) {
 				temp = null;
-				current_toggle = type;
+				currentToggle = type;
 			} else {
 				while (group.getElements().hasMoreElements()) {
 					AbstractButton local = group.getElements().nextElement();
-					if (local.getName().equals(current_toggle)) {
+					if (local.getName().equals(currentToggle)) {
 						group.setSelected(local.getModel(), true);
 						break;
 					}
 				}
 			}
 		} else {
-			current_toggle = type;
+			currentToggle = type;
 		}
 	}
 
@@ -632,7 +632,7 @@ public class ImageMap extends JFrame implements ActionListener {
 	 * @return copyclip button
 	 */
 	public JButton getClip_button() {
-		return copyClip_button;
+		return copyClipButton;
 	}
 
 	/**
@@ -640,7 +640,7 @@ public class ImageMap extends JFrame implements ActionListener {
 	 * @return mouse_position
 	 */
 	public JLabel getMouse_position() {
-		return mouse_position;
+		return mousePosition;
 	}
 
 	private class MouseController extends MouseAdapter {
@@ -862,7 +862,7 @@ public class ImageMap extends JFrame implements ActionListener {
 			setCursorStatus(p);
 			if (shape == null) {
 				if (inside) {
-					if (current_toggle == TYPE_MOUSE) {
+					if (currentToggle == TYPE_MOUSE) {
 						AbstractShape tmp = currentProject.getImagePanel().whichShape(p);
 						if (startShape == null) {
 							startShape = tmp.clone();
@@ -877,16 +877,16 @@ public class ImageMap extends JFrame implements ActionListener {
 						currentProject.getImagePanel().repaint();
 					}
 				} else {
-					if (current_toggle == AbstractShape.TYPE_RECT) {
+					if (currentToggle == AbstractShape.TYPE_RECT) {
 						dragging = true;
 						dragRect(p);
-					} else if (current_toggle == AbstractShape.TYPE_CIRC) {
+					} else if (currentToggle == AbstractShape.TYPE_CIRC) {
 						dragging = true;
 						dragCirc(p);
 					}
 				}
 			} else {
-				if (current_toggle == TYPE_MOUSE) {
+				if (currentToggle == TYPE_MOUSE) {
 					if (startShape == null) {
 						startShape = shape.clone();
 						startId = 0 + shape.getId();
@@ -943,10 +943,10 @@ public class ImageMap extends JFrame implements ActionListener {
 			Point p = e.getPoint();
 			AbstractShape shape = currentProject.getImagePanel().isInsideRect(p);
 			setCursorStatus(p);
-			if (shape != null && current_toggle == TYPE_MOUSE) {
+			if (shape != null && currentToggle == TYPE_MOUSE) {
 				Cursor cursor = Cursor.getPredefinedCursor(shape.getResizeCursor(p));
 				setCursor(cursor);
-			} else if (currentProject.getImagePanel().isInside(p) && current_toggle == TYPE_MOUSE) {
+			} else if (currentProject.getImagePanel().isInside(p) && currentToggle == TYPE_MOUSE) {
 				Cursor cursor = Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR);
 				setCursor(cursor);
 			} else {
@@ -962,7 +962,7 @@ public class ImageMap extends JFrame implements ActionListener {
 		private void setCursorStatus(Point p) {
 			int x = (int) p.getX();
 			int y = (int) p.getY();
-			mouse_position.setText("x = " + x + ", y = " + y);
+			mousePosition.setText("x = " + x + ", y = " + y);
 		}
 
 	} // end of inner class MouseMotionController
@@ -1084,7 +1084,7 @@ public class ImageMap extends JFrame implements ActionListener {
 				temp = null;
 				startShape = null;
 				endShape = null;
-				mouse_position.setText("   ");
+				mousePosition.setText("   ");
 				path.setText("");
 			}
 		}
