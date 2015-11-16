@@ -1,0 +1,3 @@
+Existe um padrão chamado Memento que funciona como um "crtl + z" e acho que pode ser implementado no pacote imagemap.util.action pois aquela pilha funciona como undo/redo de modificações na imagem
+
+Achei a teoria sobre Memento numa dissetação... mas como estava sem internet não pude ver exemplos

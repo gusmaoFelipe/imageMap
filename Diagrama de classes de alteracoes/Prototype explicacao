@@ -1,0 +1,4 @@
+Não foi possível a aplicação do padrão Prototype, pois:
+
+- Não há Banco de Dados para trabalhar em ResultSet;
+- Não tem situações de reutilização de instâncias.
