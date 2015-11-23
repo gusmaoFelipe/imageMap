@@ -19,7 +19,7 @@ import javax.swing.plaf.metal.MetalTabbedPaneUI;
 /**
  * @author Niklas Miroll
  * @author Jean Henrique Ferreira
- * @author Felipe Gusm�o
+ * @author Felipe Gusmao
  */
 public class ImageMap extends JFrame implements ActionListener {
 	/**
@@ -69,6 +69,8 @@ public class ImageMap extends JFrame implements ActionListener {
 			}
 		});
 	} // end of Constructor for ImageMap
+
+	public ImageMap(String string) {}
 
 	/**
 	 * @param args
@@ -422,22 +424,54 @@ public class ImageMap extends JFrame implements ActionListener {
 	/**
 	 * open new image
 	 */
-	private void doNew() {
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Bilder", "gif", "png", "jpg", "jpeg", "bmp");
+	private boolean doNew() {
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Bilder",
+				"gif", "png", "jpg", "jpeg", "bmp");
 		fc.setFileFilter(filter);
 		int returnVal = fc.showOpenDialog(this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = fc.getSelectedFile();
-			try {
-				addProject(file);
-			} catch (Exception e) {
-				e.printStackTrace();
-				JOptionPane.showMessageDialog(frame, "Image could not be loaded.");
+			if (this.validarArquivo(file.getName())) {
+				try {
+					addProject(file);
+					return true;
+				} catch (Exception e) {
+					JOptionPane
+							.showMessageDialog(
+									frame,
+									"This file could not be loaded.\n"
+											+ e.getMessage(), "ERROR!",
+									JOptionPane.ERROR_MESSAGE);
+					return false;
+				}
 			}
 		} else {
-			JOptionPane.showMessageDialog(frame, "File could not be opened.");
+
+			if (returnVal == JFileChooser.CANCEL_OPTION) {
+				JOptionPane.showMessageDialog(frame, "Select a file to open.",
+						"FAIL!!", JOptionPane.WARNING_MESSAGE);
+			} else {
+				JOptionPane.showMessageDialog(frame,
+						"File could not be opened.");
+
+			}
 		}
+		return false;
 	} // end of doNew()
+
+	public boolean validarArquivo(String nome) {
+		String extencao = nome.substring(nome.indexOf(".") + 1);
+		if (extencao.equals("gif") || extencao.equals("png")
+				|| extencao.equals("jpg") || extencao.equals("jpeg")
+				|| extencao.equals("bmp")) {
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(frame, "This file of extension '."
+					+ extencao + "' could not be loaded.\n", "ERROR!",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+	}
 
 	/**
 	 * save imagemap to html
