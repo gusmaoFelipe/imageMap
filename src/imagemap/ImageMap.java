@@ -19,7 +19,7 @@ import javax.swing.plaf.metal.MetalTabbedPaneUI;
 /**
  * @author Niklas Miroll
  * @author Jean Henrique Ferreira
- * @author Felipe Gusmï¿½o
+ * @author Felipe Gusmão
  */
 public class ImageMap extends JFrame implements ActionListener {
 	/**
@@ -42,7 +42,7 @@ public class ImageMap extends JFrame implements ActionListener {
 	private JMenuItem redo;
 	private JMenuItem shapeImport;
 	private JMenuItem scale;
-	private JLabel mousePositionImgMap;
+	private JLabel mousePosition;
 	private JLabel path;
 	private Point temp;
 	private AbstractShape startShape;
@@ -251,12 +251,12 @@ public class ImageMap extends JFrame implements ActionListener {
 		// status bar
 		JPanel status = new JPanel(new BorderLayout());
 		path = new JLabel("ImageMap wurde noch nicht gespeichert.");
-		mousePositionImgMap = new JLabel("  ");
+		mousePosition = new JLabel("  ");
 		status.add(path, BorderLayout.WEST);
-		status.add(mousePositionImgMap, BorderLayout.EAST);
-		Font font = mousePositionImgMap.getFont();
+		status.add(mousePosition, BorderLayout.EAST);
+		Font font = mousePosition.getFont();
 		Font boldFont = new Font(font.getFontName(), Font.BOLD, font.getSize());
-		mousePositionImgMap.setFont(boldFont);
+		mousePosition.setFont(boldFont);
 		path.setFont(boldFont);
 
 		// build frame and assemble components
@@ -627,13 +627,20 @@ public class ImageMap extends JFrame implements ActionListener {
 		return mmc;
 	}
 
-	public JButton getClipButton() {
+	/**
+	 * 
+	 * @return copyclip button
+	 */
+	public JButton getClip_button() {
 		return copyClipButton;
 	}
-	
-	
-	public JLabel getMousePositionImgMap(){
-		return this.mousePositionImgMap;
+
+	/**
+	 * 
+	 * @return mouse_position
+	 */
+	public JLabel getMouse_position() {
+		return mousePosition;
 	}
 
 	private class MouseController extends MouseAdapter {
@@ -955,7 +962,7 @@ public class ImageMap extends JFrame implements ActionListener {
 		private void setCursorStatus(Point p) {
 			int x = (int) p.getX();
 			int y = (int) p.getY();
-			mousePositionImgMap.setText("x = " + x + ", y = " + y);
+			mousePosition.setText("x = " + x + ", y = " + y);
 		}
 
 	} // end of inner class MouseMotionController
@@ -1077,7 +1084,7 @@ public class ImageMap extends JFrame implements ActionListener {
 				temp = null;
 				startShape = null;
 				endShape = null;
-				mousePositionImgMap.setText("   ");
+				mousePosition.setText("   ");
 				path.setText("");
 			}
 		}
