@@ -5,6 +5,8 @@ import imagemap.ImageMap;
 
 import org.junit.Test;
 
+//Testes para o método validarArquivo
+
 public class ImageMapTeste extends TestCase{
 	ImageMap imageMap = new ImageMap("teste");
 	
