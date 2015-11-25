@@ -73,4 +73,13 @@ public class PreviewPanel extends JEditorPane implements MouseMotionListener {
 	public void setPanel(ImagePanel panel) {
 		this.panel = panel;
 	}
+	
+	/**
+	 * 
+	 * @param panel
+	 *            to be get
+	 */
+	public ImagePanel getPanel() {
+		return this.panel;
+	}
 }
