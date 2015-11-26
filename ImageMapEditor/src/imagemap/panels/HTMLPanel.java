@@ -36,7 +36,7 @@ public class HTMLPanel extends JTextPane {
 		StyleConstants.setForeground(black, Color.black);
 		setEditable(false);
 	}
-	
+
 	/**
 	 * 
 	 * @return line numbers to be shown
@@ -84,7 +84,8 @@ public class HTMLPanel extends JTextPane {
 		Pattern pattern = Pattern.compile("<[a-z]+|</[a-z]+>|>");
 		Matcher m = pattern.matcher(arg0);
 		boolean tmp = m.find(offset);
-		if (tmp) this.getStyledDocument().setCharacterAttributes(m.start(0), m.end(0), blue, false);
+		if (tmp)
+			this.getStyledDocument().setCharacterAttributes(m.start(0), m.end(0), blue, false);
 	}
 
 	/**
@@ -96,7 +97,8 @@ public class HTMLPanel extends JTextPane {
 		Pattern pattern = Pattern.compile(" [a-z]+=\"");
 		Matcher m = pattern.matcher(arg0);
 		boolean tmp = m.find(offset);
-		if (tmp) this.getStyledDocument().setCharacterAttributes(m.start(0) + 1, m.end(0) - 2, red, false);
+		if (tmp)
+			this.getStyledDocument().setCharacterAttributes(m.start(0) + 1, m.end(0) - 2, red, false);
 	}
 
 	/**
@@ -108,7 +110,8 @@ public class HTMLPanel extends JTextPane {
 		Pattern pattern = Pattern.compile("\"(.*?)\"");
 		Matcher m = pattern.matcher(arg0);
 		boolean tmp = m.find(offset);
-		if (tmp) this.getStyledDocument().setCharacterAttributes(m.start(0), m.end(0), gray, false);
+		if (tmp)
+			this.getStyledDocument().setCharacterAttributes(m.start(0), m.end(0), gray, false);
 		offset++;
 	}
 
