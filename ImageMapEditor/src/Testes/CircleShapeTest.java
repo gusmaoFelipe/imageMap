@@ -7,7 +7,7 @@ import java.awt.Point;
 
 import org.junit.Test;
 
-// Testes para o médoto contains
+// Testes para o mï¿½doto contains
 
 public class CircleShapeTest {
 
@@ -16,8 +16,10 @@ public class CircleShapeTest {
 	public void test1() {
 		int x=5;
 		int y=5;
+		//indica a posicao do ponto central
 		Point ponto = new Point(x,y);
 		int raio=5;
+		//indica o raio do raio
 		CircleShape circle = new CircleShape(ponto,raio);
 		assertTrue(circle.contains(5, 5));
 	}
@@ -55,7 +57,7 @@ public class CircleShapeTest {
 		assertFalse(circle.contains(-5,-5));
 	}
 
-	//Ponto x>0; y>0; porém fora do circulo
+	//Ponto x>0; y>0; porï¿½m fora do circulo
 	@Test
 	public void test5() {
 		int x=5;
