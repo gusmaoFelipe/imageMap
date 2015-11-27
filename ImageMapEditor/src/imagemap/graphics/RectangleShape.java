@@ -250,7 +250,7 @@ public class RectangleShape extends AbstractShape {
 	public String getTypeName() {
 		return "rect";
 	}
-	
+
 	/**
 	 * @see imagemap.graphics.AbstractShape#scaleShape(double)
 	 */
