@@ -1,0 +1,3 @@
+[submodule "ImageMapEditor"]
+	path = ImageMapEditor
+	url = git://github.com/gusmaoFelipe/imageMap.git
