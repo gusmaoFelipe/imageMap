@@ -9,17 +9,16 @@ Aplicado na disciplina de Tópicos Avançados em Ciência da Computação: Engen
 pelos alunos Felipe Gusmão e Jean Ferreira.
 
 Refactoring Techniques applied:
-
 + Design Patterns
-+ - Singleton
-+ - Factory Method
++ + Singleton
++ + Factory Method
 
 + Tests (6 classes with 36 scenarios)
 
 + More refactoring techniques
-+ - Checkstyle (bad smell)
-+ - Encapsulate Downcast
-+ - Replace Temp with Query
-+ - Encapsulate Fields
-+ - Extract Method
-+ - Extract Variable
++ + Checkstyle (bad smell)
++ + Encapsulate Downcast
++ + Replace Temp with Query
++ + Encapsulate Fields
++ + Extract Method
++ + Extract Variable

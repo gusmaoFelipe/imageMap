@@ -1,3 +1,0 @@
-Fiz as alterações, mas o programa nao estava funcionando mais... entao reverti as modificações na classe imagemap.panels.ImagePanel e mantive as classes do proxy pois não têm nenhuma ligação com as outras.
-
-Resumindo: só serve pra dar migué
