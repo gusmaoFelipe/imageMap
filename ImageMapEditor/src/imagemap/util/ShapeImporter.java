@@ -18,7 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * @author Niklas Miroll
  * @author Jean Henrique Ferreira
- * @author Felipe Gusmão
+ * @author Felipe Gusmï¿½o
  */
 public class ShapeImporter extends JDialog {
 
@@ -103,7 +103,7 @@ public class ShapeImporter extends JDialog {
 		ok.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				doSelection(panel.currentShape.getType());
+				doSelection(panel.getCurrentShape().getType());
 			}
 		});
 		all.addActionListener(new ActionListener() {
@@ -148,7 +148,7 @@ public class ShapeImporter extends JDialog {
 			private static final long serialVersionUID = 1L;
 
 			public void actionPerformed(ActionEvent e) {
-				doSelection(panel.currentShape.getType());
+				doSelection(panel.getCurrentShape().getType());
 			}
 		};
 		ok.getActionMap().put("performSave", performSave);

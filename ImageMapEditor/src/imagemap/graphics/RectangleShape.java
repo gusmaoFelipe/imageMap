@@ -72,14 +72,15 @@ public class RectangleShape extends AbstractShape {
 	@Override
 	public boolean cornerContains(Point p) {
 		Vector<Rectangle> tmp_rect = new Vector<Rectangle>();
-		tmp_rect.add(new Rectangle(rect.x - 3, rect.y - 3, 6, 6));
-		tmp_rect.add(new Rectangle(rect.x + rect.width - 3, rect.y - 2, 6, 6));
-		tmp_rect.add(new Rectangle(rect.x - 3, rect.y + rect.height - 2, 6, 6));
-		tmp_rect.add(new Rectangle(rect.x + rect.width - 3, rect.y + rect.height - 3, 6, 6));
-		for (Rectangle rectangle : tmp_rect) {
-			if (rectangle.contains(p)) {
+		final Rectangle[] cantos = new Rectangle[] { new Rectangle(rect.x - 3, rect.y - 3, 6, 6),
+				new Rectangle(rect.x + rect.width - 3, rect.y - 2, 6, 6),
+				new Rectangle(rect.x - 3, rect.y + rect.height - 2, 6, 6),
+				new Rectangle(rect.x + rect.width - 3, rect.y + rect.height - 3, 6, 6) };
+
+		for (Rectangle r : cantos) {
+			tmp_rect.add(r);
+			if (r.contains(p))
 				return true;
-			}
 		}
 		return false;
 	}

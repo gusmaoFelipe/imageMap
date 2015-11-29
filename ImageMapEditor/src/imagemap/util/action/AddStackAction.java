@@ -5,7 +5,7 @@ import imagemap.graphics.*;
 /**
  * @author Niklas Miroll
  * @author Jean Henrique Ferreira
- * @author Felipe Gusmão
+ * @author Felipe Gusmï¿½o
  */
 public class AddStackAction implements AbstractStackAction {
 	private CircleShape editedCircleShape;

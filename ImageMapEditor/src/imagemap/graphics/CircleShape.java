@@ -14,7 +14,7 @@ import java.awt.Stroke;
 /**
  * @author Niklas Miroll
  * @author Jean Henrique Ferreira
- * @author Felipe paes Gusmão
+ * @author Felipe paes Gusmï¿½o
  */
 public class CircleShape extends AbstractShape {
 	private Point circCent;
@@ -55,14 +55,16 @@ public class CircleShape extends AbstractShape {
 	 */
 	@Override
 	public boolean contains(int x, int y) {
-		int x_tmp = (int) circCent.getX();
-		int y_tmp = (int) circCent.getY();
-		double dist = Math.sqrt((Math.pow((x - x_tmp), 2) + Math.pow((y - y_tmp), 2)));
+		double dist = calculaDistancia(x - (int) circCent.getX(), y - (int) circCent.getY());
 		if (dist < circR) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	private double calculaDistancia(int x, int y) {
+		return Math.sqrt((Math.pow((x), 2) + Math.pow((y), 2)));
 	}
 
 	/**
@@ -123,7 +125,7 @@ public class CircleShape extends AbstractShape {
 	public void movePoint(Point p, int xdir, int ydir) {
 		double xcomponent = p.getX() - circCent.getX() + xdir;
 		double ycomponent = p.getY() - circCent.getY() + ydir;
-		circR = (int) Math.sqrt((Math.pow(xcomponent, 2) + Math.pow(ycomponent, 2)));
+		circR = (int) calculaDistancia((int) xcomponent, (int) ycomponent);
 		if (circR < 4) {
 			circR = 4;
 		}

@@ -1,11 +1,13 @@
 package imagemap.util.action;
 
 import imagemap.graphics.AbstractShape;
+import imagemap.graphics.CircleShape;
+import imagemap.graphics.RectangleShape;
 
 /**
  * @author Niklas Miroll
  * @author Jean Henrique Ferreira
- * @author Felipe Gusmão
+ * @author Felipe Gusmï¿½o
  */
 public class MoveStackAction implements AbstractStackAction {
 	private AbstractShape editedShape;
@@ -13,6 +15,7 @@ public class MoveStackAction implements AbstractStackAction {
 	protected int actionType;
 	protected String undoDescription;
 	protected String redoDescription;
+
 	/**
 	 * constructor
 	 * 
@@ -27,12 +30,26 @@ public class MoveStackAction implements AbstractStackAction {
 		undoDescription = "Move edited Shape to original position.";
 		redoDescription = "Move Shape back to edited position.";
 	}
-	
+
 	/**
 	 * @return the editedShape
 	 */
 	public AbstractShape getEditedShape() {
+		switch(editedShape.getType()){
+			case AbstractShape.TYPE_RECT:
+				return returnRectangleEditedShape();
+			case AbstractShape.TYPE_CIRC:
+				return returnCircleEditedShape();
+		}
 		return editedShape;
+	}
+
+	public RectangleShape returnRectangleEditedShape() {
+		return (RectangleShape) editedShape;
+	}
+
+	public CircleShape returnCircleEditedShape() {
+		return (CircleShape) editedShape;
 	}
 
 	/**
@@ -41,7 +58,7 @@ public class MoveStackAction implements AbstractStackAction {
 	public AbstractShape getOriginalShape() {
 		return originalShape;
 	}
-	
+
 	/**
 	 * @see imagemap.util.action.AbstractStackAction#specificString()
 	 */
@@ -49,13 +66,14 @@ public class MoveStackAction implements AbstractStackAction {
 	public String specificString() {
 		return null;
 	}
+
 	/**
 	 * @return the actionType
 	 */
 	public int getActionType() {
 		return actionType;
 	}
-	
+
 	/**
 	 * @return the undoDescription
 	 */
@@ -69,14 +87,13 @@ public class MoveStackAction implements AbstractStackAction {
 	public String getRedoDescription() {
 		return redoDescription;
 	}
-	
+
 	/**
 	 * overridden toString() method for debug purposes
 	 */
 	@Override
 	public String toString() {
-		String out = "[Type of Action: " + actionType + "; "
-				+ specificString() + "]";
+		String out = "[Type of Action: " + actionType + "; " + specificString() + "]";
 		return out;
 	}
 

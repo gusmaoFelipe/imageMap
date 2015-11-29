@@ -17,7 +17,7 @@ import javax.swing.*;
 /**
  * @author Niklas Miroll
  * @author Jean Henrique Ferreira
- * @author Felipe Gusmão
+ * @author Felipe Gusmï¿½o
  */
 public class ImagePanel extends JPanel {
 
@@ -33,7 +33,7 @@ public class ImagePanel extends JPanel {
 	private Stack<AbstractStackAction> redoStack = new Stack<AbstractStackAction>();
 	private AbstractShape tempShape;
 	private AbstractShape draggedShape;
-	public AbstractShape currentShape;
+	private AbstractShape currentShape;
 	private String imagePath;
 	private String savePath;
 	private CustomHTMLDoc doc;
@@ -62,7 +62,7 @@ public class ImagePanel extends JPanel {
 				g2.drawImage(img, 0, 0, img.getWidth(this), img.getHeight(this), this);
 				if (!shapeList.isEmpty()) {
 					for (AbstractShape shape : shapeList) {
-						if (currentShape != null && shape.matches(currentShape)) {
+						if (getCurrentShape() != null && shape.matches(getCurrentShape())) {
 							shape.setColor(Color.red);
 						} else {
 							shape.setColor(Color.black);
@@ -92,7 +92,7 @@ public class ImagePanel extends JPanel {
 		undoStack.push(new AddStackAction(AbstractStackAction.ADD, shape.clone(),type));
 		frame.getUndo().setEnabled(true);
 		frame.getUndoButton().setEnabled(true);
-		currentShape = shape;
+		setCurrentShape(shape);
 		upRevRep();
 	}
 
@@ -205,7 +205,7 @@ public class ImagePanel extends JPanel {
 	 */
 	public void die() {
 		this.img = null;
-		this.currentShape = null;
+		this.setCurrentShape(null);
 		this.redoStack = new Stack<AbstractStackAction>();
 		this.undoStack = new Stack<AbstractStackAction>();
 		this.shapeList = new Vector<AbstractShape>();
@@ -387,11 +387,11 @@ public class ImagePanel extends JPanel {
 	 */
 	public void doDelete(AbstractShape target) {
 		if (target == null) {
-			target = currentShape;
+			target = getCurrentShape();
 		}
 		shapeList.remove(target);
 		doc.getMap().removeSubElement(target.getId());
-		currentShape = null;
+		setCurrentShape(null);
 		undoStack.push(new RemoveStackAction(AbstractStackAction.REMOVE, target));
 		upRevRep();
 	}
@@ -413,7 +413,7 @@ public class ImagePanel extends JPanel {
 	 */
 	public void doCopy(AbstractShape target) {
 		if (target == null) {
-			target = currentShape;
+			target = getCurrentShape();
 		}
 		int type = target.getType();
 		switch (type) {
@@ -805,6 +805,13 @@ public class ImagePanel extends JPanel {
 	 */
 	public void setEditing(boolean editing) {
 		this.editing = editing;
+	}
+
+	/**
+	 * @return the currentShape
+	 */
+	public AbstractShape getCurrentShape() {
+		return currentShape;
 	}
 
 }

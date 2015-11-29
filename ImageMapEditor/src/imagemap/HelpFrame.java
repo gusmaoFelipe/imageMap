@@ -9,7 +9,7 @@ import javax.swing.border.*;
 /**
  * @author Niklas Miroll
  * @author Jean Henrique Ferreira
- * @author Felipe Gusmão
+ * @author Felipe Gusmï¿½o
  */
 public class HelpFrame extends JFrame {
 	/**
@@ -20,7 +20,7 @@ public class HelpFrame extends JFrame {
 	private JTabbedPane tabs;
 	private JLabel aboutMe;
 	
-	//SINGLETON: Objeto único e global
+	//SINGLETON: Objeto ï¿½nico e global
 	private static HelpFrame objectSingleton = null;
 
 	/**
@@ -56,7 +56,21 @@ public class HelpFrame extends JFrame {
 		aboutMe = new JLabel();
 		tabs = new JTabbedPane();
 
-		// assembling
+		assembling(general, rect, circ, poly, editing, res, mov, bf, extras, scale, imp, about);
+
+		finalizing();
+	}
+
+	private void finalizing() {
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		this.add(tabs);
+		this.setTitle("Help");
+		this.setSize((int) d.getWidth() / 3, (int) d.getHeight() / 3);
+		this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
+	}
+
+	private void assembling(JPanel general, JTextArea rect, JTextArea circ, JTextArea poly, JPanel editing,
+			JTextArea res, JTextArea mov, JTextArea bf, JPanel extras, JTextArea scale, JTextArea imp, JPanel about) {
 		String r = "To draw a rectangle click on beginning edge and drag to opposite edge of rectangle.\nReleasing the mouse will finish it.";
 		setUpTextArea(rect, "Rectangle", r);
 		String c = "To draw a circle click on the center of your desired circle and drag the radius.\nReleasing the mouse will finish it.";
@@ -97,13 +111,6 @@ public class HelpFrame extends JFrame {
 		updateAbout();
 		aboutMe.setHorizontalAlignment(JLabel.CENTER);
 		tabs.add(about, "About");
-
-		// finalizing
-		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-		this.add(tabs);
-		this.setTitle("Help");
-		this.setSize((int) d.getWidth() / 3, (int) d.getHeight() / 3);
-		this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
 	}
 
 	/**
@@ -143,7 +150,7 @@ public class HelpFrame extends JFrame {
 	}
 	
 	//ADICIONADO NOVO GETINSTANCE DE ACORDO COM PADRAO SINGLETON
-	//Obs.: static pois está sendo usado pela classe ImageMap
+	//Obs.: static pois estï¿½ sendo usado pela classe ImageMap
 	public static HelpFrame getInstance(){
 		if(objectSingleton == null){
 			objectSingleton = new HelpFrame();
