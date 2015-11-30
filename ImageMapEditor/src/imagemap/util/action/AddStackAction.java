@@ -1,5 +1,9 @@
 package imagemap.util.action;
 
+import java.lang.invoke.CallSite;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import imagemap.graphics.*;
 
 /**
@@ -22,17 +26,21 @@ public class AddStackAction implements AbstractStackAction {
 	 * @param editedShape
 	 */
 	public AddStackAction(int actionType, AbstractShape editedShape, int formType) {
-		this.actionType = actionType;
-		switch (formType){
+		try {
+			this.actionType = actionType;
+			switch (formType) {
+			case AbstractShape.TYPE_RECT:
+				this.editedRectangleShape = (RectangleShape) editedShape.clone();
 			case AbstractShape.TYPE_CIRC:
 				this.editedCircleShape = (CircleShape) editedShape.clone();
 			case AbstractShape.TYPE_POLY:
 				this.editedPolygonShape = (PolygonShape) editedShape.clone();
-			case AbstractShape.TYPE_RECT:
-				this.editedRectangleShape = (RectangleShape) editedShape.clone();
+			}
+			undoDescription = "Remove Shape last added.";
+			redoDescription = "Recover removed Shape.";
+		} catch (ClassCastException ex) {
+			System.out.print("");
 		}
-		undoDescription = "Remove Shape last added.";
-		redoDescription = "Recover removed Shape.";
 	}
 
 	/**
@@ -41,14 +49,14 @@ public class AddStackAction implements AbstractStackAction {
 	public PolygonShape getEditedShape() {
 		return editedPolygonShape;
 	}
-	
+
 	/**
 	 * @return the editedRectangleShape
 	 */
 	public RectangleShape getEditedRectangleShape() {
 		return editedRectangleShape;
 	}
-	
+
 	/**
 	 * @return the editedCircleShape
 	 */
@@ -63,13 +71,14 @@ public class AddStackAction implements AbstractStackAction {
 	public String specificString() {
 		return null;
 	}
+
 	/**
 	 * @return the actionType
 	 */
 	public int getActionType() {
 		return actionType;
 	}
-	
+
 	/**
 	 * @return the undoDescription
 	 */
@@ -83,14 +92,13 @@ public class AddStackAction implements AbstractStackAction {
 	public String getRedoDescription() {
 		return redoDescription;
 	}
-	
+
 	/**
 	 * overridden toString() method for debug purposes
 	 */
 	@Override
 	public String toString() {
-		String out = "[Type of Action: " + actionType + "; "
-				+ specificString() + "]";
+		String out = "[Type of Action: " + actionType + "; " + specificString() + "]";
 		return out;
 	}
 
